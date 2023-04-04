@@ -1,0 +1,28 @@
+stages: [ merge ]
+
+merge-job:
+  stage: merge
+  # Use ubi for compliance.
+  image: quay.io/app-sre/ubi8-ubi:latest
+  # Our runners do not execute unttaged jobs (... alex suspects).
+  tags: [ shared ]
+  before_script:
+  # Install git. Could be useful ʕ •ᴥ•ʔ.
+  - dnf install -qy git
+  # Since RH self signs internal services we need to tell git to use the rh cert when talking
+  # to gitlab. Also tell git how this job is called.
+  - export GIT_SSL_CAINFO=redhat/ca.cert
+  - git config --global user.email "merge@bert"
+  - git config --global user.name "mergeboy"
+  script:
+  # Fetch all the required refs from origin (=gitlab) since the job starts without them.
+  - git fetch origin main redhat redhat-main
+  # Job starts with a detached head. Switch to main-redhat.
+  - git switch -c redhat-main origin/redhat-main
+  # Merge the main branch into redhat-main.
+  - git merge origin/main
+  # Merge the redhat and main branch into redhat-main.
+  - git merge origin/redhat
+  # Push redhat-main back to origin. The default CI token only has read permission so an extra token from
+  # a gitlab variable is used to authorize the push.
+  - git push -f https://gitlab-ci-token:$PUSH_TOKEN@gitlab.cee.redhat.com/lp-sre/package-operator.git redhat-main

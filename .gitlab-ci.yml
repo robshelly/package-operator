@@ -16,13 +16,13 @@ merge-job:
   - git config --global user.name "mergeboy"
   script:
   # Fetch all the required refs from origin (=gitlab) since the job starts without them.
-  - git fetch origin main redhat redhat-main
+  - git fetch origin main redhat internal
   # Job starts with a detached head. Switch to main-redhat.
-  - git switch -c redhat-main origin/redhat-main
+  - git switch -c internal origin/internal
   # Merge the main branch into redhat-main.
   - git merge origin/main
   # Merge the redhat and main branch into redhat-main.
   - git merge origin/redhat
   # Push redhat-main back to origin. The default CI token only has read permission so an extra token from
   # a gitlab variable is used to authorize the push.
-  - git push -f https://gitlab-ci-token:$PUSH_TOKEN@gitlab.cee.redhat.com/lp-sre/package-operator.git redhat-main
+  - git push -f https://gitlab-ci-token:$PUSH_TOKEN@gitlab.cee.redhat.com/lp-sre/package-operator.git internal

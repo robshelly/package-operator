@@ -1,6 +1,10 @@
 stages: [ merge ]
 
 merge-job:
+  only:
+  - main
+  - internal
+  - redhat
   stage: merge
   # Use ubi for compliance.
   image: quay.io/app-sre/ubi8-ubi:latest

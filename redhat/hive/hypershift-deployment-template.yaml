@@ -80,7 +80,7 @@ objects:
                 containers:
                 - name: package-operator
                   image: ${REGISTRY_IMG}:${IMAGE_TAG}
-                  command: ["/.bootstrap-bin/pko",  "-self-bootstrap=${PACKAGE_IMG}:${IMAGE_TAG}"]
+                  args: ["-self-bootstrap=${PACKAGE_IMG}:${IMAGE_TAG}"]
                   env:
                     - name: PKO_NAMESPACE
                       valueFrom:

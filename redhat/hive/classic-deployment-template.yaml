@@ -73,8 +73,8 @@ objects:
           spec:
             # delete right after completion
             ttlSecondsAfterFinished: 0
-            # set deadline to 15min
-            activeDeadlineSeconds: 900
+            # set deadline to 30min
+            activeDeadlineSeconds: 1800
             template:
               spec:
                 restartPolicy: OnFailure

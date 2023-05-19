@@ -65,6 +65,13 @@ objects:
             - kind: ServiceAccount
               name: package-operator
               namespace: openshift-package-operator
+        - apiVersion: v1
+          kind: ConfigMap
+          metadata:
+            namespace: openshift-package-operator
+            name: trusted-ca-bundle
+            labels:
+              config.openshift.io/inject-trusted-cabundle: "true"
         - apiVersion: batch/v1
           kind: Job
           metadata:
@@ -90,4 +97,17 @@ objects:
                           fieldPath: metadata.namespace
                     - name: PKO_CONFIG
                       value: '{"affinity":{"nodeAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":{"nodeSelectorTerms":[{"matchExpressions":[{"key":"node-role.kubernetes.io/infra","operator":"Exists"}]}]}}},"tolerations":[{"effect":"NoSchedule","key":"node-role.kubernetes.io/infra"}],"resources":{"limits":{"cpu":"200m","memory":"200Mi"},"requests":{"cpu":"200m","memory":"200Mi"}}}'
+                  volumeMounts:
+                  - mountPath: /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+                    name: trusted-ca-bundle
+                    subPath: tls-ca-bundle.pem
+                    readOnly: true
+              volumes:
+              - configMap:
+                  defaultMode: 420
+                  items:
+                    - key: ca-bundle.crt
+                      path: tls-ca-bundle.pem
+                  name: trusted-ca-bundle
+                name: trusted-ca-bundle
             backoffLimit: 6

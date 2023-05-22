@@ -89,14 +89,13 @@ objects:
                     - name: PKO_CONFIG
                       value: '{"resources":{"limits":{"cpu":"200m","memory":"500Mi"},"requests":{"cpu":"200m","memory":"500Mi"}}}'
             backoffLimit: 6
-        - apiVersion: monitoring.coreos.com/v1
+        - apiVersion: rhobs/v1
           kind: ServiceMonitor
           metadata:
             name: package-operator
             namespace: openshift-package-operator
             labels:
               app.kubernetes.io/name: package-operator
-              release: prometheus
           spec:
             endpoints:
               - interval: 10s

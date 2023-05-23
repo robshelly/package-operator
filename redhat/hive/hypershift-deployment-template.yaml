@@ -100,6 +100,9 @@ objects:
             endpoints:
               - interval: 10s
                 port: metrics
+                params:
+                  'match[]':
+                    - '{__name__=~"package_operator_.*"}'
             selector:
               matchLabels:
                 app.kubernetes.io/name: package-operator

@@ -102,12 +102,12 @@ objects:
                     name: trusted-ca-bundle
                     subPath: tls-ca-bundle.pem
                     readOnly: true
-              volumes:
-              - configMap:
-                  defaultMode: 420
-                  items:
-                    - key: ca-bundle.crt
-                      path: tls-ca-bundle.pem
+                volumes:
+                - configMap:
+                    defaultMode: 420
+                    items:
+                      - key: ca-bundle.crt
+                        path: tls-ca-bundle.pem
+                    name: trusted-ca-bundle
                   name: trusted-ca-bundle
-                name: trusted-ca-bundle
             backoffLimit: 6

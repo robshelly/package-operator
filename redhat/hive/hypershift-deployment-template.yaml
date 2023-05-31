@@ -42,6 +42,9 @@ objects:
             labels:
               openshift.io/cluster-monitoring: "true"
               package-operator.run/cache: "True"
+              pod-security.kubernetes.io/enforce: 'baseline'
+              pod-security.kubernetes.io/audit: 'baseline'
+              pod-security.kubernetes.io/warn: 'baseline'
         - apiVersion: v1
           kind: ServiceAccount
           metadata:

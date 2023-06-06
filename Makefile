@@ -27,3 +27,15 @@ app-interface-push-images:
 			./mage build:pushImages; \
 	echo) 2>&1 | sed 's/^/  /'
 .PHONY: app-interface-push-images
+
+.PHONY: sync-repos
+sync-repos:
+	git config user.email "merge@bert"
+	git config user.name "mergeboy"
+	git checkout --detach
+	GIT_SSL_CAINFO=redhat/ca.cert git fetch https://devtools-bot:${GITLAB_TOKEN}@gitlab.cee.redhat.com/lp-sre/package-operator.git internal:internal redhat:redhat
+	git fetch https://github.com/package-operator/package-operator.git main:main
+	git checkout internal
+	git merge -Xtheirs main
+	git merge -Xtheirs redhat
+	GIT_SSL_CAINFO=redhat/ca.cert git push https://devtools-bot:${GITLAB_TOKEN}@gitlab.cee.redhat.com/lp-sre/package-operator.git main internal

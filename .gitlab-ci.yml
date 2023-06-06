@@ -15,18 +15,12 @@ merge-job:
   - dnf install -qy git
   # Since RH self signs internal services we need to tell git to use the rh cert when talking
   # to gitlab. Also tell git how this job is called.
-  - export GIT_SSL_CAINFO=redhat/ca.cert
   - git config --global user.email "merge@bert"
   - git config --global user.name "mergeboy"
   script:
-  # Fetch all the required refs from origin (=gitlab) since the job starts without them.
-  - git fetch origin main redhat internal
-  # Job starts with a detached head. Switch to main-redhat.
-  - git switch -c internal origin/internal
-  # Merge the main branch into redhat-main.
-  - git merge origin/main
-  # Merge the redhat and main branch into redhat-main.
-  - git merge origin/redhat
-  # Push redhat-main back to origin. The default CI token only has read permission so an extra token from
-  # a gitlab variable is used to authorize the push.
-  - git push -f https://gitlab-ci-token:$PUSH_TOKEN@gitlab.cee.redhat.com/lp-sre/package-operator.git internal
+  - GIT_SSL_CAINFO=redhat/ca.cert git fetch https://$GITLAB_CREDENTIALS@gitlab.cee.redhat.com/lp-sre/package-operator.git internal:internal redhat:redhat
+  - git fetch https://github.com/package-operator/package-operator.git main:main
+  - git checkout internal
+  - git merge -Xtheirs main
+  - git merge -Xtheirs redhat
+  - GIT_SSL_CAINFO=redhat/ca.cert git push https://$GITLAB_CREDENTIALS@gitlab.cee.redhat.com/lp-sre/package-operator.git main internal

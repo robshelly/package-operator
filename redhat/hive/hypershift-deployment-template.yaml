@@ -40,6 +40,7 @@ objects:
           metadata:
             name: openshift-package-operator
             labels:
+              hypershift.openshift.io/monitoring: "true"
               openshift.io/cluster-monitoring: "true"
               package-operator.run/cache: "True"
               pod-security.kubernetes.io/enforce: 'baseline'

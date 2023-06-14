@@ -91,7 +91,7 @@ objects:
                         fieldRef:
                           fieldPath: metadata.namespace
                     - name: PKO_CONFIG
-                      value: '{"namespace":"openshift-package-operator","resources":{"limits":{"cpu":"200m","memory":"500Mi"},"requests":{"cpu":"200m","memory":"500Mi"}}}'
+                      value: '{"namespace":"openshift-package-operator","resources":{"limits":{"cpu":"1","memory":"500Mi"},"requests":{"cpu":"1","memory":"500Mi"}}}'
             backoffLimit: 6
         - apiVersion: monitoring.rhobs/v1
           kind: ServiceMonitor

@@ -7,3 +7,6 @@ RUN microdnf install -y \
 WORKDIR /workdir
 
 COPY . .
+
+ENV CGO_ENABLED=1
+

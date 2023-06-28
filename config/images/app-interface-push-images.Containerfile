@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9-minimal:latest
+FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
 
 RUN microdnf install -y \
   python3-pip make ncurses git go-toolset podman gcc && \

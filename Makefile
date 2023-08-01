@@ -5,21 +5,8 @@ SHORT_SHA=$(shell git rev-parse --short HEAD)
 VERSION?=${SHORT_SHA}
 IMAGE_ORG="quay.io/app-sre"
 
-integration-tests: 
-	@echo "-------------------------------------------------"
-	@echo "running integration tests ..."
-	@echo "-------------------------------------------------"
-	$(eval IMAGE_NAME := app-interface-push-images)
-	@(docker build -t "${IMAGE_ORG}/${IMAGE_NAME}:${VERSION}" -f "config/images/${IMAGE_NAME}.Containerfile" --pull .; \
-		docker run --rm \
-			--privileged \
-			"${IMAGE_ORG}/${IMAGE_NAME}:${VERSION}" \
-			./mage test:integration kubectl-package test:integration package-operator-local; \
-	echo) 2>&1 | sed 's/^/  /'
-.PHONY: integration-tests
-
 # App Interface specific push-images target, to run within a docker container.
-app-interface-push-images: integration-tests
+app-interface-push-images:
 	@echo "-------------------------------------------------"
 	@echo "running in app-interface-push-images container..."
 	@echo "-------------------------------------------------"

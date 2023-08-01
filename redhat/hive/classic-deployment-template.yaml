@@ -74,6 +74,7 @@ objects:
             namespace: openshift-package-operator
             name: trusted-ca-bundle
             labels:
+              package-operator.run/cache: "True"
               config.openshift.io/inject-trusted-cabundle: "true"
         - apiVersion: batch/v1
           kind: Job

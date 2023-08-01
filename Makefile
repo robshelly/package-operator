@@ -14,8 +14,7 @@ integration-tests:
 		docker run --rm \
 			--privileged \
 			"${IMAGE_ORG}/${IMAGE_NAME}:${VERSION}" \
-			./mage test:integration kubectl-package \
-			./mage test:integration package-operator-local; \
+			./mage test:integration kubectl-package test:integration package-operator-local; \
 	echo) 2>&1 | sed 's/^/  /'
 .PHONY: integration-tests
 

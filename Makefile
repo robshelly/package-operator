@@ -11,7 +11,7 @@ app-interface-push-images:
 	@echo "running in app-interface-push-images container..."
 	@echo "-------------------------------------------------"
 	$(eval IMAGE_NAME := app-interface-push-images)
-	@(docker build -t "${IMAGE_ORG}/${IMAGE_NAME}:${VERSION}" -f "config/images/${IMAGE_NAME}.Containerfile" --pull .; \
+	@(docker build --network=host -t "${IMAGE_ORG}/${IMAGE_NAME}:${VERSION}" -f "config/images/${IMAGE_NAME}.Containerfile" --pull .; \
 		docker run --rm \
 			--privileged \
 			-e JENKINS_HOME=${JENKINS_HOME} \

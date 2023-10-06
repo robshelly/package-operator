@@ -91,7 +91,7 @@ objects:
                         fieldRef:
                           fieldPath: metadata.namespace
                     - name: PKO_CONFIG
-                      value: '{"namespace":"openshift-package-operator","resources":{"limits":{"cpu":"1","memory":"500Mi"},"requests":{"cpu":"1","memory":"500Mi"}}}'
+                      value: '{ "namespace": "openshift-package-operator", "resources": { "limits": { "cpu": "1", "memory": "500Mi" }, "requests": { "cpu": "1", "memory": "500Mi" } }, "tolerations": [ { "effect": "NoSchedule", "key": "node-role.kubernetes.io/infra" }, { "effect": "NoSchedule", "key": "hypershift.openshift.io/hosted-control-plane" } ], "affinity": { "nodeAffinity": { "requiredDuringSchedulingIgnoredDuringExecution": { "nodeSelectorTerms": [ { "matchExpressions": [ { "key": "node-role.kubernetes.io/infra", "operator": "Exists" } ] }, { "matchExpressions": [ { "key": "hypershift.openshift.io/hosted-control-plane", "operator": "Exists" } ] } ] } } } }'
             backoffLimit: 6
         - apiVersion: monitoring.rhobs/v1
           kind: ServiceMonitor

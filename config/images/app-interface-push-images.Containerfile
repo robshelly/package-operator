@@ -10,6 +10,10 @@ RUN dnf install -y python3-pip make ncurses git podman gcc \
   http://download.eng.bos.redhat.com/brewroot/vol/rhel-9/packages/golang/1.21.3/3.el9/noarch/golang-src-1.21.3-3.el9.noarch.rpm && \
   pip3 install pre-commit
 
+ARG _REPO_URL="https://raw.githubusercontent.com/containers/podman/main/contrib/podmanimage/stable"
+ADD $_REPO_URL/containers.conf /etc/containers/containers.conf
+ADD $_REPO_URL/podman-containers.conf /home/podman/.config/containers/containers.conf
+
 WORKDIR /workdir
 
 COPY . .

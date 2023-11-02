@@ -12,7 +12,7 @@ app-interface-push-images:
 	@echo "-------------------------------------------------"
 	$(eval IMAGE_NAME := app-interface-push-images)
 	@(docker build --network=host -t "${IMAGE_ORG}/${IMAGE_NAME}:${VERSION}" -f "config/images/${IMAGE_NAME}.Containerfile" --pull .; \
-		docker run --rm \
+		docker run --network=host --rm \
 			--privileged \
 			-e JENKINS_HOME=${JENKINS_HOME} \
 			-e QUAY_USER=${QUAY_USER} \

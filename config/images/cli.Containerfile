@@ -1,5 +1,7 @@
 FROM registry.access.redhat.com/ubi9/ubi-minimal:latest
 
+RUN dnf install -y diffutils
+
 WORKDIR /
 COPY kubectl-package /
 

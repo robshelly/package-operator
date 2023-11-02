@@ -1,5 +1,7 @@
 FROM registry.access.redhat.com/ubi9/ubi:latest
 
+ENV CGO_ENABLED=1 GOPROXY="https://proxy.golang.org" GOSUMDB="sum.golang.org"
+
 # Ubi ships with outdated go, install recent version directly from build system.
 RUN dnf install -y python3-pip make ncurses git podman gcc \
   http://download.eng.bos.redhat.com/brewroot/vol/rhel-9/packages/golang/1.21.3/3.el9/x86_64/golang-1.21.3-3.el9.x86_64.rpm \
@@ -11,5 +13,3 @@ RUN dnf install -y python3-pip make ncurses git podman gcc \
 WORKDIR /workdir
 
 COPY . .
-
-ENV CGO_ENABLED=1

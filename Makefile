@@ -35,5 +35,7 @@ sync-repos:
 	git fetch https://github.com/package-operator/package-operator.git main:main
 	git checkout internal
 	git merge -Xtheirs main
-	git merge -Xtheirs redhat
+	git checkout redhat -- '*'
+	git add .
+	git commit -m 'sync redhat branch into internal'
 	git push https://devtools-bot:${GITLAB_TOKEN}@gitlab.cee.redhat.com/lp-sre/package-operator.git main internal

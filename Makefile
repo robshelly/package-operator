@@ -37,5 +37,5 @@ sync-repos:
 	git merge -Xtheirs main
 	git checkout redhat -- '*'
 	git add .
-	git commit -m 'sync redhat branch into internal'
+	git diff-index --quiet HEAD || git commit -m 'sync redhat branch into internal'
 	git push https://devtools-bot:${GITLAB_TOKEN}@gitlab.cee.redhat.com/lp-sre/package-operator.git main internal

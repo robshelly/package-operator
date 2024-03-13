@@ -22,7 +22,7 @@ app-interface-push-images:
 			-e REMOTE_PHASE_PACKAGE_IMAGE="${IMAGE_REGISTRY}/package-operator-hs-package:${VERSION}" \
 			-e CLI_IMAGE="${IMAGE_REGISTRY}/package-operator-cli:${VERSION}" \
 			"${IMAGE_REGISTRY}/${IMAGE_NAME}:${VERSION}" \
-			./do CI:RegistryLoginAndReleaseOnlyImages "${REGISTRY_HOST}" -u "${{ QUAY_USER }}" -p "${{ QUAY_TOKEN }}" && \
+			./do CI:RegistryLoginAndReleaseOnlyImages "${REGISTRY_HOST}" -u "${QUAY_USER}" -p "${QUAY_TOKEN}" && \
 	echo) 2>&1 | sed 's/^/  /'
 .PHONY: app-interface-push-images
 

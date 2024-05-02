@@ -4,7 +4,7 @@ metadata:
   name: selectorsyncset-template
 
 parameters:
-  - name: REGISTRY_IMG
+  - name: PACKAGE_IMG
     required: true
   - name: IMAGE_TAG
     required: true
@@ -72,5 +72,5 @@ objects:
                           metadata:
                             name: hosted-cluster
                           spec:
-                            image: ${REGISTRY_IMG}:${IMAGE_TAG}
+                            image: ${PACKAGE_IMG}:${IMAGE_TAG}
                             component: hosted-cluster

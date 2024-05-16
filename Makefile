@@ -20,6 +20,7 @@ app-interface-push-images:
 			-e IMAGE_REGISTRY="${IMAGE_REGISTRY}" \
 			-e REMOTE_PHASE_MANAGER_IMAGE="${IMAGE_REGISTRY}/package-operator-hs-connector:${VERSION}" \
 			-e REMOTE_PHASE_PACKAGE_IMAGE="${IMAGE_REGISTRY}/package-operator-hs-package:${VERSION}" \
+			-e GOEXPERIMENT=strictfipsruntime \
 			-e CLI_IMAGE="${IMAGE_REGISTRY}/package-operator-cli:${VERSION}" \
 			"${IMAGE_REGISTRY}/${IMAGE_NAME}:${VERSION}" \
 			./do CI:RegistryLoginAndReleaseOnlyImages "${REGISTRY_HOST}" -u "${QUAY_USER}" -p "${QUAY_TOKEN}" && \
